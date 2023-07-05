@@ -90,3 +90,12 @@ Route::post('/webhook', [PaymentsController::class, 'webhook'])->name('webhook')
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 
+
+Route::get('storage/{filename}',function ($file){
+   $filePath = storage_path('app/public' . $file);
+   if(!is_file($filePath)){
+       abort(404);
+   }
+
+   return response()->file($filePath);
+})->where('file', '.+');
