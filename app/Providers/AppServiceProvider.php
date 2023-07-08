@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        // $this->app->bind('path.public', function (){
+        //     return base_path('public_html');
+        // });
+
         $this->app->singleton('paypal.client', function($app){
             $config = config('services.paypal');
             if($config['mode'] == 'sandbox'){
