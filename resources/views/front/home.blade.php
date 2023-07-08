@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <hr>
-                <h2 style="color: #f03455;">Categories</h2>
+                <h2 style="color: #f03455;">{{trans('lang.categories')}}</h2>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <hr>
-                <h2 style="color: #f03455;">Bundles</h2>
+                <h2 style="color: #f03455;">{{trans('lang.nuss_bundles')}}</h2>
             </div>
         </div>
         <div class="grid-3">
