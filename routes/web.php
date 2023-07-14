@@ -36,14 +36,13 @@ use App\Http\Middleware\LangMiddleware;
 */
 
 
-
 require __DIR__ . '/auth.php';
 
 
-Route::middleware(LangMiddleware::class)->group(function (){
+Route::middleware(LangMiddleware::class)->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::group(['middleware' => ['auth']], function (){
+    Route::group(['middleware' => ['auth']], function () {
         Route::prefix('admin')
             ->middleware(['middleware' => AdminMiddleware::class])
             ->group(function () {
@@ -57,8 +56,8 @@ Route::middleware(LangMiddleware::class)->group(function (){
                 Route::post('about-us', [AdminAboutUsController::class, 'update'])->name('aboutUs.update');
                 Route::get('settings', [ConfigsController::class, 'create'])->name('settings');
                 Route::post('settings', [ConfigsController::class, 'store']);
-                Route::get('payments', [AdminPaymentsController::class , 'index'])->name('payments.index');
-                Route::get('payment/{id}', [AdminPaymentsController::class , 'show'])->name('payments.show');
+                Route::get('payments', [AdminPaymentsController::class, 'index'])->name('payments.index');
+                Route::get('payment/{id}', [AdminPaymentsController::class, 'show'])->name('payments.show');
                 Route::resource('roles', RolesController::class);
                 Route::resource('coupons', AdminCouponsController::class);
                 Route::resource('orders', OrdersController::class);
@@ -95,18 +94,37 @@ Route::middleware(LangMiddleware::class)->group(function (){
 
 });
 
-Route::post('/lang', function (\Illuminate\Http\Request $request){
+Route::post('/lang', function (\Illuminate\Http\Request $request) {
     $lang = $request->get('lang');
-    if($lang)
+    if ($lang)
         session()->put('lang', $lang);
-        return redirect()->back();
+    return redirect()->back();
 })->name('local');
 
-Route::get('storage/{filename}',function ($file){
-   $filePath = storage_path('app/public' . $file);
-   if(!is_file($filePath)){
-       abort(404);
-   }
 
-   return response()->file($filePath);
+Route::get('/get-log', function () {
+
+    // Set the remote storage path obtained from the remote server
+    $remoteStoragePath = 'https://mohrkeyapp.com/storage';
+
+// Append the relative log file path to the remote storage path
+    $logFilePath = $remoteStoragePath . '/logs/laravel.log';
+    if (file_exists($logFilePath)) {
+        // Read the log file contents
+        $logContents = file_get_contents($logFilePath);
+        // Output the log contents
+        echo nl2br(htmlspecialchars($logContents));
+    } else {
+        echo "The log file does not exist.";
+    }
+
+});
+
+Route::get('storage/{filename}', function ($file) {
+    $filePath = storage_path('app/public' . $file);
+    if (!is_file($filePath)) {
+        abort(404);
+    }
+
+    return response()->file($filePath);
 })->where('file', '.+');

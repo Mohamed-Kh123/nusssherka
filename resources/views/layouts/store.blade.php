@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="ar">
+<html class="no-js">
 
 <!-- index28:48-->
 
@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('assets/front/css/magnific-popup.css') }}">
     <!-- Bootstrap V4.1.3 Fremwork CSS -->
     <link rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css.map') }}">
+
     <!-- Helper CSS -->
     <link rel="stylesheet" href="{{ asset('assets/front/css/helper.css') }}">
     <!-- Main Style CSS -->
@@ -52,7 +54,7 @@
 
 </head>
 
-<body>
+<body dir="{{app()->getLocale() === 'en' ? 'ltr' : 'rtl'}}">
 @php
     $user = \App\Models\User::where('type', 'super-admin')->first();
     @endphp
@@ -125,20 +127,25 @@
                                                 <form action="{{route('local')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" value="en" name="lang" />
-                                                    <button type="submit">
+                                                    <button type="submit" class="d-flex align-items-center gap-2" style="gap: 5px">
                                                         <img
                                                             src="{{ asset('assets/front/images/menu/flag-icon/1.jpg') }}"
                                                             alt="">
-                                                        {{trans('lang.english')}}</button>
+                                                        <span>
+                                                            {{trans('lang.english')}}
+                                                        </span>
+                                                        </button>
                                                 </form>
                                             </li>
                                             <li class="active">
                                                 <form action="{{route('local')}}" method="post">
                                                     <input type="hidden" value="ar" name="lang" />
                                                     @csrf
-                                                    <button type="submit"><img
-                                                            src="{{ asset('assets/front/images/menu/flag-icon/1.jpg') }}"
-                                                            alt="">{{trans('lang.arabic')}}</button>
+                                                    <button type="submit" class="d-flex align-items-center gap-2" style="gap:5px"><img
+                                                            src="{{ asset('assets/front/images/menu/flag-icon/0.jpg') }}"
+                                                            alt="">
+                                                    <span>{{trans('lang.arabic')}}</span>
+                                                    </button>
                                                 </form>
                                             </li>
                                         </ul>
@@ -155,7 +162,7 @@
         <!-- Header Top Area End Here -->
         <!-- Begin Header Middle Area -->
         <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
-            <div class="d-flex align-items-center justify-content-between px-3">
+            <div class="d-flex align-items-center justify-content-center px-3" style="gap: 60px">
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('assets/logo.png') }}" width="100px" height="100px" alt="">
                 </a>
@@ -275,104 +282,104 @@
                 <!-- Footer Shipping Area End Here -->
             </div>
         </div>
-        <!-- Footer Static Top Area End Here -->
-        <!-- Begin Footer Static Middle Area -->
-        <div class="footer-static-middle">
-            <div class="container">
-                <div class="footer-logo-wrap pt-50 pb-35">
-                    <div class="row">
-                        <!-- Begin Footer Logo Area -->
-                        <div class="col-lg-4 col-md-6">
-                            <div class="footer-logo">
-                                <img src="{{ asset('assets/front/images/menu/logo/1.jpg') }}" alt="Footer Logo">
-                                <p class="info">
-                                    We are a team of designers and developers that create high quality HTML Template
-                                    & Woocommerce, Shopify Theme.
-                                </p>
-                            </div>
-                            <ul class="des">
-                                <li>
-                                    <span>Address: </span>
-                                    6688Princess Road, London, Greater London BAS 23JK, UK
-                                </li>
-                                <li>
-                                    <span>Phone: </span>
-                                    <span> {{$user ? $user->phone_number : null }}</span>
-                                </li>
-                                <li>
-                                    <span>Email: </span>
-                                    <a href="mailto://info@yourdomain.com">{{$user ? $user->email : null}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Footer Logo Area End Here -->
+{{--        <!-- Footer Static Top Area End Here -->--}}
+{{--        <!-- Begin Footer Static Middle Area -->--}}
+{{--        <div class="footer-static-middle">--}}
+{{--            <div class="container">--}}
+{{--                <div class="footer-logo-wrap pt-50 pb-35">--}}
+{{--                    <div class="row">--}}
+{{--                        <!-- Begin Footer Logo Area -->--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <div class="footer-logo">--}}
+{{--                                <img src="{{ asset('assets/front/images/menu/logo/1.jpg') }}" alt="Footer Logo">--}}
+{{--                                <p class="info">--}}
+{{--                                    We are a team of designers and developers that create high quality HTML Template--}}
+{{--                                    & Woocommerce, Shopify Theme.--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <ul class="des">--}}
+{{--                                <li>--}}
+{{--                                    <span>Address: </span>--}}
+{{--                                    6688Princess Road, London, Greater London BAS 23JK, UK--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <span>Phone: </span>--}}
+{{--                                    <span> {{$user ? $user->phone_number : null }}</span>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <span>Email: </span>--}}
+{{--                                    <a href="mailto://info@yourdomain.com">{{$user ? $user->email : null}}</a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                        <!-- Footer Logo Area End Here -->--}}
 
-                        <!-- Begin Footer Block Area -->
-                        <div class="col-lg-4">
-                            <div class="footer-block">
-                                <h3 class="footer-block-title">Follow Us</h3>
-                                <ul class="social-link">
-                                    <li class="twitter">
-                                        <a href="https://twitter.com/" data-toggle="tooltip" target="_blank"
-                                           title="Twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="rss">
-                                        <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
-                                            <i class="fa fa-rss"></i>
-                                        </a>
-                                    </li>
-                                    <li class="google-plus">
-                                        <a href="https://www.plus.google.com/discover" data-toggle="tooltip"
-                                           target="_blank" title="Google Plus">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li class="facebook">
-                                        <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank"
-                                           title="Facebook">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="youtube">
-                                        <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank"
-                                           title="Youtube">
-                                            <i class="fa fa-youtube"></i>
-                                        </a>
-                                    </li>
-                                    <li class="instagram">
-                                        <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank"
-                                           title="Instagram">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Footer Block Area End Here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Static Middle Area End Here -->
-        <!-- Begin Footer Static Bottom Area -->
-        <div class="footer-static-bottom pt-55 pb-55">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Begin Footer Payment Area -->
-                        <div class="copyright text-center">
-                            <a href="">
-                                <img src="{{ asset('assets/front/images/payment/1.png') }}" alt="">
-                            </a>
-                        </div>
-                        <!-- Footer Payment Area End Here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Static Bottom Area End Here -->
+{{--                        <!-- Begin Footer Block Area -->--}}
+{{--                        <div class="col-lg-4">--}}
+{{--                            <div class="footer-block">--}}
+{{--                                <h3 class="footer-block-title">Follow Us</h3>--}}
+{{--                                <ul class="social-link">--}}
+{{--                                    <li class="twitter">--}}
+{{--                                        <a href="https://twitter.com/" data-toggle="tooltip" target="_blank"--}}
+{{--                                           title="Twitter">--}}
+{{--                                            <i class="fa fa-twitter"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="rss">--}}
+{{--                                        <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">--}}
+{{--                                            <i class="fa fa-rss"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="google-plus">--}}
+{{--                                        <a href="https://www.plus.google.com/discover" data-toggle="tooltip"--}}
+{{--                                           target="_blank" title="Google Plus">--}}
+{{--                                            <i class="fa fa-google-plus"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="facebook">--}}
+{{--                                        <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank"--}}
+{{--                                           title="Facebook">--}}
+{{--                                            <i class="fa fa-facebook"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="youtube">--}}
+{{--                                        <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank"--}}
+{{--                                           title="Youtube">--}}
+{{--                                            <i class="fa fa-youtube"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="instagram">--}}
+{{--                                        <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank"--}}
+{{--                                           title="Instagram">--}}
+{{--                                            <i class="fa fa-instagram"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- Footer Block Area End Here -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Footer Static Middle Area End Here -->--}}
+{{--        <!-- Begin Footer Static Bottom Area -->--}}
+{{--        <div class="footer-static-bottom pt-55 pb-55">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row">--}}
+{{--                    <div class="col-lg-12">--}}
+{{--                        <!-- Begin Footer Payment Area -->--}}
+{{--                        <div class="copyright text-center">--}}
+{{--                            <a href="">--}}
+{{--                                <img src="{{ asset('assets/front/images/payment/1.png') }}" alt="">--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                        <!-- Footer Payment Area End Here -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Footer Static Bottom Area End Here -->--}}
     </div>
     <!-- Footer Area End Here -->
     <!-- Begin Quick View | Modal Area -->
@@ -385,7 +392,9 @@
 <!-- Popper js -->
 <script src="{{ asset('assets/front/js/vendor/popper.min.js') }}"></script>
 <!-- Bootstrap V4.1.3 Fremwork js -->
-<script src="{{ asset('assets/front/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/bootstrap.bundle.min.js.map') }}"></script>
+
 <!-- Ajax Mail js -->
 <script src="{{ asset('assets/front/js/ajax-mail.js') }}"></script>
 <!-- Meanmenu js -->

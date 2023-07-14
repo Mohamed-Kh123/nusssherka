@@ -14,7 +14,7 @@ return [
     */
 
     'services' => 'services',
-    'nuss_bundles' => 'nuss bundles',
+    'nuss_bundles' => 'Nuss Bundles',
     'offers_and_discounts' => 'offers and discounts',
     'english' => 'English',
     'arabic' => 'Arabic',
