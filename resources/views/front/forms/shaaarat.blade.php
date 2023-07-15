@@ -1,20 +1,22 @@
 <div class="input-container">
     <input type="text" placeholder="اسم البراند" name="brand_name" required>
 </div>
-<label style="display: inline-block; margin: 20px;">اللغة المستخدمة:</label>
-<div class="form-check" style="display: inline-block;">
-    <input class="form-check-input" type="radio" value="arabic"
-           id="flexCheckDefault" name="lang">
-    <label class="form-check-label" for="flexCheckDefault">
-        اللغة العربية
-    </label>
-</div>
-<div class="form-check" style="display: inline-block;">
-    <input class="form-check-input" type="radio" value="english"
-           id="flexCheckChecked" name="lang" checked>
-    <label class="form-check-label" for="flexCheckChecked">
-        اللغة الإنجليزية
-    </label>
+<label style="display: block; margin: 8px;">اللغة المستخدمة:</label>
+<div style="display: grid; gap:15px; grid-template-columns: repeat(2, 1fr)">
+    <div style="display: inline-block;">
+        <input class="form-check-input" type="radio" value="arabic"
+               id="flexCheckDefault" name="lang">
+        <label class="form-check-label" for="flexCheckDefault">
+            اللغة العربية
+        </label>
+    </div>
+    <div style="display: inline-block;">
+        <input class="form-check-input" type="radio" value="english"
+               id="flexCheckChecked" name="lang" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+            اللغة الإنجليزية
+        </label>
+    </div>
 </div>
 <div class="input-container">
     <textarea type="text" placeholder="اوصف لنا سبب اختيار الاسم + معناه؟"
