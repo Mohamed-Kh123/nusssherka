@@ -10,11 +10,13 @@
 
         <div class="row p-2">
             @foreach ($category->products as $product)
-                <div class="col-md-3 p-2">
+                <div class="col-md-4 col-lg-3 p-2 col-6">
                     <div class="card">
                         {{--                    شوف يخال، المشكلة مش باك، المشكلة بالفرونت، عنا ال target تبع ال button مأشر على مكان واحد، عشان هيك بيفحش الا سوشيال ميديا، عشان هيك راح نعطيهم dynimc traget من ال object الي راجعلك --}}
                         <button type="button" class="modal-btn-img" data-bs-toggle="modal"
-                            data-bs-target="#{{ $product->slug }}">
+                                data-bs-target="#{{ $product->slug }}"
+                                onclick="generateForm('{{ $product->slug }}')"
+                        >
                             <img src="{{ $product->image_url }}" class="card-img-top" alt="Category 6">
                         </button>
                     </div>
@@ -24,59 +26,27 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="{{ $product->slug }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
+                        <form class="form modal-content" id="form" action="{{route('checkout')}}" method="post">
+                            @csrf
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $product->name }}</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                        aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form" id="form">
-                                    <div class="form-group">
-                                        <div class="input-container">
-                                            <input type="text" placeholder="اسم المؤسسة">
-                                        </div>
-                                        <div class="input-container">
-                                            <textarea placeholder="تعريف عام بالمشروع"></textarea>
-                                        </div>
-                                        <div class="input-container">
-                                            <textarea placeholder="بيانات التواصل"></textarea>
-                                        </div>
-                                        <div class="input-container">
-                                            <input type="text" placeholder="أبرز المنافسين">
-                                        </div>
-                                        <div class="input-container">
-                                            <input type="text" placeholder="المنطقة الجعرافية">
-                                        </div>
-                                        <div class="input-container">
-                                            <textarea placeholder="محتوى التصميم"></textarea>
-                                        </div>
-                                        <div class="input-container">
-                                            <input type="text" placeholder="ملاحظات للمصمم">
-                                        </div>
-                                        <div class="input-container">
-                                            <label>إرفق الشعارات وملفات الهوية</label>
-                                            <input type="file" multiple>
-                                        </div>
-                                        {{-- <div class="input-container">
-                                            <label for="images" class="drop-container" id="dropcontainer">
-                                                <h5>الشعارات وملفات الهوية</h3>
-                                                    <span class="drop-title">إسحب الملفات وإفلتها</span>
-                                                    أو
-                                                    <input type="file" id="images" accept="image/*" required multiple>
-                                            </label>
-                                        </div> --}}
+                                    <div class="form-group" id="append-form">
+                                        @include('front.forms.'.$product->slug)
                                     </div>
-                                </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="purchase btn">اتمام عملية الدفع</button>
+                                <button class="purchase btn" type="submit">اتمام عملية الدفع</button>
                                 <button type="button" class="btn dismiss" data-bs-dismiss="modal">إلغاء
-                                    الأمر</button>
+                                    الأمر
+                                </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             @endforeach
@@ -86,28 +56,71 @@
 @endsection
 
 
-{{-- @push('script')
-    <script>
-        const dropContainer = document.getElementById("dropcontainer")
-        const fileInput = document.getElementById("images")
+@push('script')
 
-        dropContainer.addEventListener("dragover", (e) => {
-            // prevent default to allow drop
-            e.preventDefault()
-        }, false)
+{{--    <script>--}}
+{{--        function generateForm(serviceName) {--}}
+{{--            if (serviceName === 'soshal-mydya') {--}}
+{{--                $('#append-form').empty();--}}
+{{--                $('#append-form').append(`--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <input type="text" placeholder="اسم المؤسسة" name="org_name" required>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <textarea placeholder="تعريف عام بالمشروع" name="general_def"--}}
+{{--                                                      required></textarea>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <textarea placeholder="بيانات التواصل" name="contacts" required></textarea>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <input type="text" placeholder="أبرز المنافسين" name="competitors" required>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <textarea placeholder="محتوى التصميم" name="design_content"--}}
+{{--                                                      required></textarea>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <input type="text" placeholder="ملاحظات للمصمم" name="notes">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="input-container">--}}
+{{--                                            <label>إرفق الشعارات وملفات الهوية</label>--}}
+{{--                                            <input type="file" multiple name="images">--}}
+{{--                                        </div>--}}
+{{--                                    `);--}}
+{{--            }--}}
+{{--            if (serviceName === 'shaaarat') {--}}
+{{--                $('#append-form').empty();--}}
+{{--                $('#append-form').append(`--}}
+{{--                                        --}}
+{{--                `);--}}
+{{--            }--}}
+{{--        }--}}
+{{--    </script>--}}
+    {{--    <script>--}}
+    {{--        const dropContainer = document.getElementById("dropcontainer")--}}
+    {{--        const fileInput = document.getElementById("images")--}}
 
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active")
-        })
+    {{--        dropContainer.addEventListener("dragover", (e) => {--}}
+    {{--            // prevent default to allow drop--}}
+    {{--            e.preventDefault()--}}
+    {{--        }, false)--}}
 
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active")
-        })
+    {{--        dropContainer.addEventListener("dragenter", () => {--}}
+    {{--            dropContainer.classList.add("drag-active")--}}
+    {{--        })--}}
 
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault()
-            dropContainer.classList.remove("drag-active")
-            fileInput.files = e.dataTransfer.files
-        })
-    </script>
-@endpush --}}
+    {{--        dropContainer.addEventListener("dragleave", () => {--}}
+    {{--            dropContainer.classList.remove("drag-active")--}}
+    {{--        })--}}
+
+    {{--        dropContainer.addEventListener("drop", (e) => {--}}
+    {{--            e.preventDefault()--}}
+    {{--            dropContainer.classList.remove("drag-active")--}}
+    {{--            fileInput.files = e.dataTransfer.files--}}
+    {{--        })--}}
+    {{--    </script>--}}
+@endpush

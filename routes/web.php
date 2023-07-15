@@ -23,6 +23,9 @@ use App\Http\Controllers\SearchController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LangMiddleware;
+use App\Models\Product;
+use Illuminate\Support\Facades\File;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -102,23 +105,7 @@ Route::post('/lang', function (\Illuminate\Http\Request $request) {
 })->name('local');
 
 
-Route::get('/get-log', function () {
 
-    // Set the remote storage path obtained from the remote server
-    $remoteStoragePath = 'https://mohrkeyapp.com/storage';
-
-// Append the relative log file path to the remote storage path
-    $logFilePath = $remoteStoragePath . '/logs/laravel.log';
-    if (file_exists($logFilePath)) {
-        // Read the log file contents
-        $logContents = file_get_contents($logFilePath);
-        // Output the log contents
-        echo nl2br(htmlspecialchars($logContents));
-    } else {
-        echo "The log file does not exist.";
-    }
-
-});
 
 Route::get('storage/{filename}', function ($file) {
     $filePath = storage_path('app/public' . $file);
@@ -128,3 +115,5 @@ Route::get('storage/{filename}', function ($file) {
 
     return response()->file($filePath);
 })->where('file', '.+');
+
+
