@@ -62,8 +62,9 @@ class CheckoutConttoller extends Controller
             DB::commit();
 
 //            event(new OrderCreated($chec));
+            return redirect()->route('home');
 
-            return redirect()->route('orders.paymentIntent.create', $order->id);
+//            return redirect()->route('orders.paymentIntent.create', $order->id);
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
