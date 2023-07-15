@@ -27,6 +27,7 @@ return new class extends Migration
             $table->double('total_before_discount');
             $table->unsignedFloat('total');
             $table->text('note')->nullable();
+            $table->json('form_data');
             $table->timestamps();
         });
     }

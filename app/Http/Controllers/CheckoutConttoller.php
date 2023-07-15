@@ -42,7 +42,7 @@ class CheckoutConttoller extends Controller
     {
         $coupon = Session::get('coupon');
 
-        return view('front.checkout',[
+        return view('front.checkout', [
             'coupon' => $coupon,
             'discount' => $coupon['discount'] ?? 0,
             'user' => Auth::user(),
@@ -53,32 +53,30 @@ class CheckoutConttoller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
+        dd($request->all());
+
         DB::beginTransaction();
 
-
-
-        try{
+        try {
 
             $order = new Order();
 
             //createOrder is a method in the Order model
 
-            $chec = $order->createOrder($this->cart, $request);
+            $chec = $order->createOrder($request);
 
             DB::commit();
 
             event(new OrderCreated($chec));
 
-
-
             return redirect()->route('orders', $order->id);
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
         }

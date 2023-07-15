@@ -39,7 +39,7 @@
 
         <div class="row p-2">
         @foreach($categories as $category)
-            <div class="col-md-4 p-2">
+            <div class="col-md-4 col-6 p-2">
                 <div class="card">
                     <a href="{{route('category.show', $category->slug)}}"><img src="{{ $category->image }}" class="card-img-top" alt="Category 6"></a>
                 </div>
