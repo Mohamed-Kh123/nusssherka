@@ -1,3 +1,7 @@
+<input type="hidden" name="type" value="shaaarat">
+<input type="hidden" name="total" value="{{$total}}">
+
+
 <div class="input-container">
     <input type="text" placeholder="اسم البراند" name="brand_name" required>
 </div>
@@ -48,8 +52,7 @@
            name="is_picture_distinguish_you_from_them" required/>
 </div>
 <div class="input-container">
-    <input type="file" multiple
-           placeholder="هل مرت عليك شعارات سابقة ونالت إعجابك إن وجد نتمنى ان ترسلها ؟"
-           name="images" required/>
+    <label>هل مرت عليك شعارات سابقة ونالت إعجابك إن وجد نتمنى ان ترسلها ؟</label>
+    <input type="file" name="images[]" multiple/>
 </div>
 

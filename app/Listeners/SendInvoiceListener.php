@@ -23,16 +23,19 @@ class SendInvoiceListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
      * @return void
      */
     public function handle(OrderCreated $event)
     {
         $order = $event->order;
 
-        $users = User::where('type' , 'super-admin')->orWhere('type', 'admin')->orWhere('id', '=', $order->user_id)->get();
+        $users = User::where('type', 'super-admin')
+            ->orWhere('type', 'admin')
+            ->orWhere('id', '=', $order->user_id)
+            ->get();
 
-        foreach($users as $user){
+        foreach ($users as $user) {
             $user->notify(new OrderCreatedNotifications($order));
         }
     }

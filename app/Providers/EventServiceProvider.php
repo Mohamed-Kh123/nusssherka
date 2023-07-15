@@ -31,7 +31,6 @@ class EventServiceProvider extends ServiceProvider
 
         OrderCreated::class => [
             SendInvoiceListener::class,
-            DeleteCartListener::class,
             DeleteCouponListener::class,
             CompleteOrderPaymentProcessListener::class,
             CancelOrderListener::class,

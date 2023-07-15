@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use App\Observers\OrderCreated;
-use App\Services\Shipping;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class Order extends Model
@@ -45,19 +42,21 @@ class Order extends Model
         return $this->hasMany(Payment::class, 'order_id');
     }
 
-    public function createOrder(Request $request)
+    public function createOrder(Request $request, $array = [])
     {
 
         $coupon = Session::get('coupon');
         $newTotal = ($request->total - ($coupon ? $coupon['discount'] : 0));
 
+        $formData = json_encode($array);
+
         return Order::create([
             'user_id' => Auth::id(),
             'user_data' => Auth::user(),
-            'total' => $newTotal,
-            'total_before_discount' => $request->total,
-            'discount' => $coupon['discount'],
-            'form_data' => $request->form_data,
+            'total' => $request->total,
+            'total_before_discount' => $newTotal,
+            'discount' => $coupon ? $coupon['discount'] : null,
+            'form_data' => $formData,
         ]);
 
     }

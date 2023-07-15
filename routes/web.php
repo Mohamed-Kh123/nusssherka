@@ -70,6 +70,8 @@ Route::middleware(LangMiddleware::class)->group(function () {
         Route::post('/ratings', [RatingsController::class, 'store'])->name('rating.store');
         Route::post('/coupon/remove', [CouponsController::class, 'removeCoupon'])->name('coupons.remove');
         Route::post('/coupons', [CouponsController::class, 'store'])->name('coupons.apply');
+        Route::post('/checkout', [CheckoutConttoller::class, 'store'])->name('checkout.store');
+
     });
 
     Route::get('/category/{slug}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
@@ -80,12 +82,10 @@ Route::middleware(LangMiddleware::class)->group(function () {
 
     Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.index');
 
-    Route::get('/checkout', [CheckoutConttoller::class, 'create'])->name('checkout');
-    Route::post('/checkout', [CheckoutConttoller::class, 'store']);
 
     Route::get('/orders', [CheckoutConttoller::class, 'index'])->name('orders');
     Route::delete('/orders/{id}', [CheckoutConttoller::class, 'delete'])->name('order.delete');
-    Route::get('orders/{order}/pay', [PaymentsController::class, 'createPayment'])->name('orders.payments.create');
+//    Route::get('orders/{order}/pay', [PaymentsController::class, 'createPayment'])->name('orders.payments.create');
     Route::any('orders/{id}/payment-intent', [PaymentsController::class, 'create'])->name('orders.paymentIntent.create');
     Route::get('orders/payment-intent/callback/{id?}', [PaymentsController::class, 'confirm'])->name('orders.payments.return');
     Route::get('orders/{order}/payment-intent/cancel', [PaymentsController::class, 'cancel'])->name('orders.payments.cancel');

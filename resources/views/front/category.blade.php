@@ -28,7 +28,8 @@
                 <div class="modal fade" id="{{ $product->slug }}" data-bs-backdrop="static" data-bs-keyboard="false"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
-                        <form class="form modal-content" id="form" action="{{route('checkout')}}" method="post">
+                        <form class="form modal-content" id="form" action="{{route('checkout.store')}}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $product->name }}</h1>
@@ -36,9 +37,11 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                    <div class="form-group" id="append-form">
-                                        @include('front.forms.'.$product->slug)
-                                    </div>
+                                <div class="form-group" id="append-form">
+                                    @include('front.forms.'.$product->slug, [
+                                        'total' => $product->price
+                                    ])
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="purchase btn" type="submit">اتمام عملية الدفع</button>
@@ -58,48 +61,48 @@
 
 @push('script')
 
-{{--    <script>--}}
-{{--        function generateForm(serviceName) {--}}
-{{--            if (serviceName === 'soshal-mydya') {--}}
-{{--                $('#append-form').empty();--}}
-{{--                $('#append-form').append(`--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <input type="text" placeholder="اسم المؤسسة" name="org_name" required>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <textarea placeholder="تعريف عام بالمشروع" name="general_def"--}}
-{{--                                                      required></textarea>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <textarea placeholder="بيانات التواصل" name="contacts" required></textarea>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <input type="text" placeholder="أبرز المنافسين" name="competitors" required>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <textarea placeholder="محتوى التصميم" name="design_content"--}}
-{{--                                                      required></textarea>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <input type="text" placeholder="ملاحظات للمصمم" name="notes">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="input-container">--}}
-{{--                                            <label>إرفق الشعارات وملفات الهوية</label>--}}
-{{--                                            <input type="file" multiple name="images">--}}
-{{--                                        </div>--}}
-{{--                                    `);--}}
-{{--            }--}}
-{{--            if (serviceName === 'shaaarat') {--}}
-{{--                $('#append-form').empty();--}}
-{{--                $('#append-form').append(`--}}
-{{--                                        --}}
-{{--                `);--}}
-{{--            }--}}
-{{--        }--}}
-{{--    </script>--}}
+    {{--    <script>--}}
+    {{--        function generateForm(serviceName) {--}}
+    {{--            if (serviceName === 'soshal-mydya') {--}}
+    {{--                $('#append-form').empty();--}}
+    {{--                $('#append-form').append(`--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <input type="text" placeholder="اسم المؤسسة" name="org_name" required>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <textarea placeholder="تعريف عام بالمشروع" name="general_def"--}}
+    {{--                                                      required></textarea>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <textarea placeholder="بيانات التواصل" name="contacts" required></textarea>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <input type="text" placeholder="أبرز المنافسين" name="competitors" required>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <textarea placeholder="محتوى التصميم" name="design_content"--}}
+    {{--                                                      required></textarea>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <input type="text" placeholder="ملاحظات للمصمم" name="notes">--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="input-container">--}}
+    {{--                                            <label>إرفق الشعارات وملفات الهوية</label>--}}
+    {{--                                            <input type="file" multiple name="images">--}}
+    {{--                                        </div>--}}
+    {{--                                    `);--}}
+    {{--            }--}}
+    {{--            if (serviceName === 'shaaarat') {--}}
+    {{--                $('#append-form').empty();--}}
+    {{--                $('#append-form').append(`--}}
+    {{--                                        --}}
+    {{--                `);--}}
+    {{--            }--}}
+    {{--        }--}}
+    {{--    </script>--}}
     {{--    <script>--}}
     {{--        const dropContainer = document.getElementById("dropcontainer")--}}
     {{--        const fileInput = document.getElementById("images")--}}

@@ -21,8 +21,8 @@ class PaypalPayment implements PaymentMethod
     }
     public function create($id)
     {
-        $order = Order::findOrFail($id);
-        if($order->payment_status == 'paid'){
+        $order = Order::find($id);
+        if($order && $order->payment_status == 'paid'){
             return redirect()->route('orders')->with('success', 'Order already paid!');
         }
 
@@ -59,8 +59,9 @@ class PaypalPayment implements PaymentMethod
                 $link = $links->where('rel', '=', 'approve')->first();
                 Payment::create([
                     'order_id' => $order->id,
+                    'order_data' => $order,
                     'amount' => $order->total,
-                    'currancy' => "USD",
+                    'currency' => "USD",
                     'payment_method' => 'paypal',
                     'status' => $response->result->status,
                     'transaction_id' => $response->result->id,
@@ -93,7 +94,7 @@ class PaypalPayment implements PaymentMethod
         $request->prefer('return=representation');
         try {
             // Call API with your client and get a response for your call
-            $response = $this->client->execute($request);   
+            $response = $this->client->execute($request);
             if($response && $response->statusCode == 201 && $response->result->status == "COMPLETED"){
                 $order->payment_status = "paid";
                 $order->status = "processing";
@@ -104,7 +105,7 @@ class PaypalPayment implements PaymentMethod
                 return redirect()->route('orders')->with('success', 'Payment completed successfully!');
             }
             // If call returns body in response, you can get the deserialized version from the result attribute of the response
-            
+
         } catch (HttpException $ex) {
             echo $ex->statusCode;
             print_r($ex->getMessage());

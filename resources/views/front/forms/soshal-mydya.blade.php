@@ -1,3 +1,6 @@
+<input type="hidden" name="type" value="soshal-mydya">
+<input type="hidden" name="total" value="{{$total}}">
+
 <div class="input-container">
     <input type="text" placeholder="اسم المؤسسة" name="org_name" required>
 </div>
@@ -23,5 +26,5 @@
 </div>
 <div class="input-container">
     <label>إرفق الشعارات وملفات الهوية</label>
-    <input type="file" multiple name="images">
+    <input type="file" name="images[]" multiple>
 </div>

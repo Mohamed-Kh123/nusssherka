@@ -36,24 +36,24 @@ class AppServiceProvider extends ServiceProvider
         //     return base_path('public_html');
         // });
 
-        $this->app->singleton('paypal.client', function($app){
+        $this->app->singleton('paypal.client', function ($app) {
             $config = config('services.paypal');
-            if($config['mode'] == 'sandbox'){
+            if ($config['mode'] == 'sandbox') {
                 $environment = new SandboxEnvironment($config['client_id'], $config['secret_key']);
-            }else{
+            } else {
                 $environment = new ProductionEnvironment($config['client_id'], $config['secret_key']);
             }
             $client = new PayPalHttpClient($environment);
             return $client;
         });
 
-        $this->app->bind(PaymentMethod::class, function(){
-            if(config('payment.driver') == 'paypal'){
-                return new PaypalPayment();
-            }
-            if(config('payment.driver') == 'stripe'){
-                return new StripePayment();
-            }
+        $this->app->bind(PaymentMethod::class, function () {
+//            if(config('payment.driver') == 'paypal'){
+            return new PaypalPayment();
+//            }
+//            if(config('payment.driver') == 'stripe'){
+//                return new StripePayment();
+//            }
         });
     }
 
@@ -69,7 +69,6 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
 
-
 //        $settings = Cache::get('app-settings');
 //        if(!$settings){
 //            $settings = Config::all();
@@ -79,8 +78,6 @@ class AppServiceProvider extends ServiceProvider
 //        foreach($settings as $config){
 //            config()->set($config->name, $config->value);
 //        }
-
-
 
 
         Paginator::useBootstrap();

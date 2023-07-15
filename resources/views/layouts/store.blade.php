@@ -89,7 +89,6 @@
                                     <div class="setting ht-setting">
                                         <ul class="ht-setting-list">
                                             <li><a href="">My Account</a></li>
-                                            <li><a href="{{route('checkout')}}">{{trans('lang.checkout')}}</a></li>
                                             @if(!Auth::user())
                                                 <li><a href="{{ route('login') }}">{{trans('lang.sign_in')}}</a></li>
                                                 <li><a href="{{ route('register') }}">{{trans('lang.sign_up')}}</a></li>
