@@ -36,11 +36,11 @@
            name="summarize" required/>
 </div>
 <div class="input-container">
-    <input type="text" placeholder="أبرز المنافسين" name="competitors" required/>
+    <input type="text" placeholder="أبرز المنافسين" name="competitors"/>
 </div>
 <div class="input-container">
     <input type="text" placeholder="ما هي الأشياء التي تميزكم عنهم ؟"
-           name="distinguish_you_from_them" required/>
+           name="distinguish_you_from_them"/>
 </div>
 <div class="input-container">
     <input type="text" placeholder="من هي الفئة المستهدفة من المشروع ؟"
@@ -49,7 +49,7 @@
 <div class="input-container">
     <input type="text"
            placeholder="هل هناك تصور في ذهنكم عن الأشياء التي تميزكم عنهم ؟"
-           name="is_picture_distinguish_you_from_them" required/>
+           name="is_picture_distinguish_you_from_them"/>
 </div>
 <div class="input-container">
     <label>هل مرت عليك شعارات سابقة ونالت إعجابك إن وجد نتمنى ان ترسلها ؟</label>

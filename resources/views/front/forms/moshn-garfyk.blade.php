@@ -6,8 +6,7 @@
 </div>
 
 <div class="input-container">
-    <textarea placeholder="تعريف عام بالمشروع" name="general_def"
-              required></textarea>
+    <textarea placeholder="تعريف عام بالمشروع" name="general_def"></textarea>
 </div>
 <label style="display: block; margin: 8px;">مقاس الفيديو:</label>
 <div style="display: grid; gap:15px; grid-template-columns: repeat(2, 1fr)">
@@ -63,13 +62,13 @@
 </div>
 
 <div class="input-container">
-    <input type="text" placeholder="أبرز المنافسين" name="competitors" required/>
+    <input type="text" placeholder="أبرز المنافسين" name="competitors"/>
 </div>
 
 <div class="input-container">
     <input type="text"
            placeholder="ملاحظات للمصمم"
-           name="notes" required/>
+           name="notes"/>
 </div>
 <div class="input-container">
     <label>أرفق الشعار وملفات الهوية</label>

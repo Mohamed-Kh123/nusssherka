@@ -5,14 +5,13 @@
     <input type="text" placeholder="اسم المؤسسة" name="org_name" required>
 </div>
 <div class="input-container">
-    <textarea placeholder="تعريف عام بالمشروع" name="general_def"
-              required></textarea>
+    <textarea placeholder="تعريف عام بالمشروع" name="general_def"></textarea>
 </div>
 <div class="input-container">
     <textarea placeholder="بيانات التواصل" name="contacts" required></textarea>
 </div>
 <div class="input-container">
-    <input type="text" placeholder="أبرز المنافسين" name="competitors" required>
+    <input type="text" placeholder="أبرز المنافسين" name="competitors">
 </div>
 <div class="input-container">
     <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">
@@ -26,7 +25,7 @@
 </div>
 
 <div class="input-container">
-    <input type="number" placeholder="الكمية" name="qunatity">
+    <input type="number" placeholder="الكمية" name="qunatity" required>
 </div>
 <div class="input-container">
     <label>إرفق الشعارات وملفات الهوية</label>

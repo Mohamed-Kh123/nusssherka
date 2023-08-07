@@ -61,6 +61,7 @@ class CheckoutConttoller extends Controller
 
             DB::commit();
             $formData = json_decode($order->form_data);
+
             if($formData[0]->direct_pay === 0)
                 return redirect()->route('orders');
 
