@@ -72,15 +72,6 @@ class Product extends Model
         return route('single.product', $this->slug);
     }
 
-    public function getCartLinkAttribute()
-    {
-        return route('cart.store');
-    }
-
-    public function getWishlistLinkAttribute()
-    {
-        return route('wishlist.store');
-    }
 
     public function getLastPriceAttribute()
     {
@@ -95,8 +86,8 @@ class Product extends Model
 
 
 
-    protected $appends = [
-        'image_url', 'link', 'cart_link', 'wishlist_link', 'last_price',
+    // protected $appends = [
+    //     'image_url', 'link', 'cart_link', 'wishlist_link', 'last_price',
 
-    ];
+    // ];
 }

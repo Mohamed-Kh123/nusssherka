@@ -5,4 +5,6 @@ class ConstantEnum
 {
     const SOCIAL_MEDIA = 'soshal-mydya';
     const SHEAARAT = 'shaaarat';
+    const  MOSHN = "moshn-garfyk";
+
 }

@@ -1,4 +1,4 @@
-<input type="hidden" name="type" value="shaaarat">
+<input type="hidden" name="type" value="{{$type}}">
 <input type="hidden" name="total" value="{{$total}}">
 
 

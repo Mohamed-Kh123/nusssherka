@@ -24,7 +24,12 @@
 <div class="input-container">
     <input type="text" placeholder="ملاحظات للمصمم" name="notes">
 </div>
+
+<div class="input-container">
+    <input type="number" placeholder="الكمية" name="qunatity">
+</div>
 <div class="input-container">
     <label>إرفق الشعارات وملفات الهوية</label>
     <input type="file" name="images[]" multiple>
 </div>
+

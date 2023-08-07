@@ -23,21 +23,20 @@ class HomeController extends Controller
     public function index()
     {
 
-        $categories = Category::all();
+        $categories = Category::with('products')->get()->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'image' => $category->image,
+                'products_count' => $category->products->count(),
+            ];
+        });
 
 //        dd($categories);
 
-//        $visitor = new Statistic();
-//        $value = $visitor->getValue('visitors');
-//        if($value){
-//            $visitor->setValue('visitors', DB::raw('value + 1'));
-//        }
-//        if(!$value){
-//            $visitor->setValue('visitors', 1);
-//        }
 
         return view('front.home', [
-           'categories' => $categories
+            'categories' => $categories
         ]);
     }
 }

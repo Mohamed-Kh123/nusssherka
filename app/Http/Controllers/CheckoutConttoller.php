@@ -56,14 +56,14 @@ class CheckoutConttoller extends Controller
 
             //createOrder is a method in the Order model
 
-            $order= $order->createOrder($request, $this->getFormData($request));
+            $order = $order->createOrder($request, $this->getFormData($request));
 
 
             DB::commit();
+            $formData = json_decode($order->form_data);
+            if($formData[0]->direct_pay === 0)
+                return redirect()->route('orders');
 
-//            event(new OrderCreated($chec));
-//            return redirect()->route('home');
-//
             return redirect()->route('orders.paymentIntent.create', $order->id);
         } catch (Throwable $e) {
             DB::rollBack();
@@ -93,7 +93,9 @@ class CheckoutConttoller extends Controller
                 'geographical_area' => $request->geographical_area,
                 'design_content' => $request->design_content,
                 'notes' => $request->notes,
-                'images' => $this->storeImagesByType(ConstantEnum::SOCIAL_MEDIA, $request)
+                'images' => $this->storeImagesByType(ConstantEnum::SOCIAL_MEDIA, $request),
+                'direct_pay' => 1,
+
             ];
         }
 
@@ -110,7 +112,28 @@ class CheckoutConttoller extends Controller
                 'target_group' => $request->target_group,
                 'is_picture_distinguish_you_from_them' => $request->is_picture_distinguish_you_from_them,
                 'lang' => $request->lang,
-                'images' => $this->storeImagesByType(ConstantEnum::SHEAARAT, $request)
+                'images' => $this->storeImagesByType(ConstantEnum::SHEAARAT, $request),
+                'direct_pay' => 1,
+
+            ];
+        }
+
+
+        if ($request->type == ConstantEnum::MOSHN) {
+            $formData[] = [
+                "type" => $request->type,
+                "total" => $request->total,
+                "org_name" => $request->org_name,
+                "general_def" => $request->general_def,
+                "size" => $request->size,
+                "video_type" => $request->video_type,
+                "whats_up" => $request->whats_up,
+                "contacts" => $request->contacts,
+                "geographical_area" => $request->geographical_area,
+                "competitors" => $request->competitors,
+                "notes" => $request->notes,
+                "images" => $this->storeImagesByType(ConstantEnum::MOSHN, $request),
+                'direct_pay' => 0,
             ];
         }
 
