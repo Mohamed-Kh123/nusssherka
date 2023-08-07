@@ -7,15 +7,17 @@
             <caption>{{__('Orders')}}</caption>
             <thead>
             <tr>
-                <th scope="col">{{__('Status')}}</th>
-                <th scope="col">{{__('Payment Status')}}</th>
-                <th scope="col">{{__('Total')}}</th>
+                <th scope="col"> {{__("id")}}</th>
+                <th scope="col">{{__('status')}}</th>
+                <th scope="col">{{__('payment_status')}}</th>
+                <th scope="col">{{__('total')}}</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             @foreach($orders as $order)
                 <tr id="{{$order->id}}">
+                    <td data-label="id">{{$order->id}}</td>
                     <td data-label="Account">{{__("$order->status")}}</td>
                     <td data-label="Due Date">{{__("$order->payment_status")}}</td>
                     <td data-label="Amount">${{$order->total}}</td>

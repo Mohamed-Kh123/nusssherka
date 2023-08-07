@@ -17,7 +17,7 @@ class CheckoutConttoller extends Controller
 
     public function index()
     {
-        $orders = Order::where('user_id', Auth::id())->get();
+        $orders = Order::where('user_id', Auth::id())->latest()->get();
         return view('front.orders', [
             'orders' => $orders,
         ]);
@@ -57,7 +57,7 @@ class CheckoutConttoller extends Controller
             //createOrder is a method in the Order model
 
             $order = $order->createOrder($request, $this->getFormData($request));
-
+            dd($order);
 
             DB::commit();
             $formData = json_decode($order->form_data);

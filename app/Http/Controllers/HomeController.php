@@ -29,6 +29,7 @@ class HomeController extends Controller
                 'slug' => $category->slug,
                 'image' => $category->image,
                 'products_count' => $category->products->count(),
+                'price' => $category->price,
             ];
         });
 

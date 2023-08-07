@@ -16,17 +16,21 @@ class CategoriesController extends Controller
     {
         $validated = $request->validated();
 
-        $newFile = $request->file('image_path');
-        $fileUpload = $newFile->store('categories', [
-            'disk' => 'public'
-        ]);
+        if($request->get('image_path')){
+            $newFile = $request->file('image_path');
+            $fileUpload = $newFile->store('categories', [
+                'disk' => 'public'
+            ]);
+            $category->image_path = $fileUpload;
+        }
 
+//        dd($request->all());
 
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->description = $request->description;
-        $category->image_path = $fileUpload;
         $category->status = $request->status;
+        $category->price = $request->price;
         $category->save();
     }
     /**
