@@ -4,29 +4,32 @@
 <div class="input-container">
     <input type="text" placeholder="اسم المؤسسة" name="org_name" required>
 </div>
+
 <div class="input-container">
     <textarea placeholder="تعريف عام بالمشروع" name="general_def"></textarea>
 </div>
+
 <div class="input-container">
-    <textarea placeholder="بيانات التواصل" name="contacts" required></textarea>
-</div>
-<div class="input-container">
-    <input type="text" placeholder="أبرز المنافسين" name="competitors">
-</div>
-<div class="input-container">
-    <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">
-</div>
-<div class="input-container">
-    <textarea placeholder="محتوى التصميم" name="design_content"
-              required></textarea>
-</div>
-<div class="input-container">
-    <input type="text" placeholder="ملاحظات للمصمم" name="notes">
+    <input type="text" placeholder="رقم واتس للتواصل" name="whats_up" required>
 </div>
 
 <div class="input-container">
-    <input type="number" placeholder="الكمية" name="qunatity" required>
+    <textarea placeholder="بيانات التواصل للمؤسسة" name="contacts" required></textarea>
 </div>
+
+<div class="input-container">
+    <input type="text" placeholder="أبرز المنافسين" name="competitors">
+</div>
+
+<div class="input-container">
+    <input type="text" placeholder="المنطقة الجغرافية" name="geographical_area">
+</div>
+
+<div class="input-container">
+    <input type="text" placeholder="ملاحظات للكاتب" name="notes">
+</div>
+
+
 <div class="input-container">
     <label>إرفق الشعارات وملفات الهوية</label>
     <input type="file" name="images[]" multiple>
