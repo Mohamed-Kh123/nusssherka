@@ -31,4 +31,12 @@ return [
     'language' => 'Language',
     'currency' => 'Currency',
     'categories' => 'Categories',
+    'name' => 'Name',
+    'phone_number' => 'Phone number',
+    'password' => 'password',
+    'password_confirmation' => 'Password confirmation',
+    'email' => 'Email',
+    'create' => 'Create',
+    'log_in' => 'Log in',
+    'remember_me' => 'Remember me',
 ];

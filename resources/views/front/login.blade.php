@@ -1,58 +1,53 @@
-@extends('layouts.store')
+@extends('layouts.auth')
 @section('content')
     <!-- Begin Li's Breadcrumb Area -->
-    <div class="breadcrumb-area">
-        <div class="container">
-            <div class="breadcrumb-content">
+
+    <form method="POST" action="{{ route('login') }}" class="d-flex justify-content-center">
+        @csrf
+        @if ($errors->any())
+            <div class="alert alert-danger">
                 <ul>
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="active">Log in</li>
+                    @foreach ($errors->all() as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
                 </ul>
             </div>
-        </div>
-    </div>
-    <!-- Li's Breadcrumb Area End Here -->
-    <!-- Begin Login Content Area -->
-    <div class="page-section mb-60">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
-                    <!-- Login Form s-->
-                    <form action="{{ route('login') }}" method="POST">
-                        @csrf
-                        <div class="login-form">
-                            <h4 class="login-title">Login</h4>
-                            <div class="row">
-                                <div class="col-md-12 col-12 mb-20">
-                                    <label>Email Address*</label>
-                                    <input class="mb-0" type="email" placeholder="Email Address" name="email">
-                                </div>
-                                <div class="col-12 mb-20">
-                                    <label>Password</label>
-                                    <input class="mb-0" type="password" placeholder="Password" name="password">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
-                                        <input type="checkbox" id="remember_me">
-                                        <label for="remember_me">Remember me</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
-                                    @if (Route::has('password.request'))
-                                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                                        {{ __('Forgot your password?') }}
-                                    </a>
-                                @endif      
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="register-button mt-0" type="submit">Login</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        @endif
+        <div class="w-75 p-3 bg-white rounded-3 text-center"
+             style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%)">
+            <img src="{{asset('assets/logo.png')}}" class="logo my-3"/>
+            <!-- Email Address -->
+            <div class="input-container">
+                <label>{{trans('lang.email')}}</label>
+                <input id="email" class="block mt-1 w-full" type="email" name="email"
+                       value="{{old('email', request()->get('email'))}}"/>
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4 input-container">
+                <label>{{trans('lang.password')}}</label>
+
+                <input id="password" class="block mt-1 w-full"
+                       type="password"
+                       name="password"
+                       required autocomplete="current-password"/>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="d-block text-end mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox"
+                           class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                           name="remember">
+                    <span class="ml-2 text-sm text-gray-600">{{ trans('lang.remember_me') }}</span>
+                </label>
+            </div>
+
+            <div class="d-flex items-center justify-content-center mt-4">
+                <button class="ml-3 btn btn--animated px-5">
+                    {{ trans('lang.log_in') }}
+                </button>
             </div>
         </div>
-    </div>
-    <!-- Login Content Area End Here -->
+    </form>
 @endsection

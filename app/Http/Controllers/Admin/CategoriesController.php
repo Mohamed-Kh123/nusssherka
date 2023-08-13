@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Repositories\Image\ImageRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -12,19 +13,20 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
 {
+
+    protected $imageRepository;
+
+    public function __construct(ImageRepository $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
     private function save(Category $category, CategoryRequest $request)
     {
         $validated = $request->validated();
-
-        if($request->get('image_path')){
-            $newFile = $request->file('image_path');
-            $fileUpload = $newFile->store('categories', [
-                'disk' => 'public'
-            ]);
-            $category->image_path = $fileUpload;
+        if($request->hasFile('image')){
+            $category->image_path = $this->imageRepository->upload($request->image);
+//            dd($category->image);
         }
-
-//        dd($request->all());
 
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
@@ -33,11 +35,7 @@ class CategoriesController extends Controller
         $category->price = $request->price;
         $category->save();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         Gate::authorize('category.view-any');
@@ -48,11 +46,6 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         Gate::authorize('category.create');
@@ -65,12 +58,6 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CategoryRequest $request)
     {
         Gate::authorize('category.create');
@@ -82,12 +69,7 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category Added Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         Gate::authorize('category.view');
@@ -97,12 +79,7 @@ class CategoriesController extends Controller
         return view('admin.categories.show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         Gate::authorize('category.update');
@@ -116,13 +93,7 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(CategoryRequest $request, $id)
     {
         Gate::authorize('category.update');
@@ -134,12 +105,7 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success', "Category $category->id Updated Successfully");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         Gate::authorize('category.delete');

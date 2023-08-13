@@ -13,6 +13,15 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'form_data', 'discount', 'total_before_discount', 'total', 'user_data', 'user_id',
+    ];
+
+    protected $casts = [
+        'form_data' => 'array',
+        'user_data' => 'array',
+    ];
+
     protected static function booted()
     {
         static::observe(OrderCreated::class);
@@ -42,13 +51,13 @@ class Order extends Model
         return $this->hasMany(Payment::class, 'order_id');
     }
 
-    public function createOrder(Request $request, $array = [])
+    public function createOrder(Request $request, $data = [])
     {
 
         $coupon = Session::get('coupon');
         $newTotal = ($request->total - ($coupon ? $coupon['discount'] : 0));
 
-        $formData = json_encode($array);
+//        $formData = json_encode($array);
 
         return Order::create([
             'user_id' => Auth::id(),
@@ -56,7 +65,7 @@ class Order extends Model
             'total' => $request->total,
             'total_before_discount' => $newTotal,
             'discount' => $coupon ? $coupon['discount'] : null,
-            'form_data' => $formData,
+            'form_data' => $data,
         ]);
 
     }

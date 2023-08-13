@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class Product extends Model
 {
@@ -17,15 +21,16 @@ class Product extends Model
 
     protected static function booted()
     {
-        static::creating(function(Product $product){
+        static::creating(function (Product $product) {
             $product->slug = Str::slug($product->name);
         });
 
-        static::updating(function(Product $product){
+        static::updating(function (Product $product) {
             $product->slug = Str::slug($product->name);
         });
 
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id')->withDefault('No Category');
@@ -35,6 +40,7 @@ class Product extends Model
     {
         return $this->hasMany(Rating::class, 'product_id');
     }
+
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 'active');
@@ -48,13 +54,24 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
-        if($this->image){
-            return asset('storage/'.$this->image);
-        }
-        if($this->image == null){
-            return asset('storage/null.jpg');
-        }
+        if ($this->image) {
+            $path = storage_path("app/public/uploads/images/$this->image");
+            $exists = File::exists($path);
+            if (!$exists) {
+                return asset('storage/null.jpg');
+            }
 
+            $image = Image::make($path);
+
+            $response = Response::make($image->encode($image->mime), 200);
+            $response->header("CF-Cache-Status", 'HIF');
+            $response->header("Cache-Control", 'max-age=604800, public');
+            $response->header("Content-Type", $image->mime);
+
+            // Generate a URL for the image
+            return asset("storage/uploads/images/$this->image");
+        }
+        return asset('storage/null.jpg');
     }
 
     // public function getPriceAttribute()
@@ -75,9 +92,9 @@ class Product extends Model
 
     public function getLastPriceAttribute()
     {
-        if($this->discount != null){
-            return $this->price  - (($this->discount / 100) * $this->price);
-        }else{
+        if ($this->discount != null) {
+            return $this->price - (($this->discount / 100) * $this->price);
+        } else {
             return $this->price;
         }
     }

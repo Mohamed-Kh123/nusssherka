@@ -1,0 +1,59 @@
+/* tajawal-200 - latin */
+@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/Tajawal-ExtraLight.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-300 - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/Tajawal-Light.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-regular - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Tajawal-Regular.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-500 - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/Tajawal-Medium.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-700 - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/Tajawal-Bold.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-800 - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/Tajawal-ExtraBold.ttf'); /* IE9 Compat Modes */
+  }
+  /* tajawal-900 - latin */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/Tajawal-Black.ttf'); /* IE9 Compat Modes */
+
+  }
+
+  /* londrina-outline-regular - latin */
+@font-face {
+    font-family: 'Londrina Outline';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/LondrinaOutline-Regular.ttf'); /* IE9 Compat Modes */
+
+  }

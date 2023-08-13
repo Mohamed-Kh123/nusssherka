@@ -39,10 +39,11 @@ use Illuminate\Support\Facades\File;
 */
 
 
-require __DIR__ . '/auth.php';
 
 
 Route::middleware(LangMiddleware::class)->group(function () {
+    require __DIR__ . '/auth.php';
+
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::group(['middleware' => ['auth']], function () {

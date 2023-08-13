@@ -9,6 +9,7 @@ use App\Models\Dimension;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\ProductDimension;
+use App\Repositories\Image\ImageRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -17,17 +18,20 @@ use Throwable;
 
 class ProductsController extends Controller
 {
+
+    protected $imageRepository;
+
+    public function __construct(ImageRepository $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
+
     private function save(Product $product, ProductRequest $request)
     {
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = $file->store('products', [
-                'disk' => 'public',
-            ]);
-
-            $product->image = $path;
+            $product->image = $this->imageRepository->upload($request->image);
         }
 
         $category = Category::find($request->category_id);

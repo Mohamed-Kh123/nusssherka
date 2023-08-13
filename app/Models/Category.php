@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class Category extends Model
 {
@@ -50,12 +53,24 @@ class Category extends Model
 
     public function getImageAttribute()
     {
-        if($this->image_path){
-            return asset('storage/'.$this->image_path);
+        if ($this->image_path) {
+            $path = storage_path("app/public/uploads/images/$this->image_path");
+            $exists = File::exists($path);
+            if (!$exists) {
+                return asset('storage/null.jpg');
+            }
+
+            $image = Image::make($path);
+
+            $response = Response::make($image->encode($image->mime), 200);
+            $response->header("CF-Cache-Status", 'HIF');
+            $response->header("Cache-Control", 'max-age=604800, public');
+            $response->header("Content-Type", $image->mime);
+
+            // Generate a URL for the image
+            return asset("storage/uploads/images/$this->image_path");
         }
+        return asset('storage/null.jpg');
     }
 
-    protected $appends = [
-        'image',
-    ];
 }

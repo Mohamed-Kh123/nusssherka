@@ -47,7 +47,7 @@
 </div>
 <div class="form-group">
     <label for="">{{ __('Image') }}</label>
-    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image_path">
+    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
     @error('image')
     <p class="invalid-feedback">{{ $message }}</p>
     @enderror

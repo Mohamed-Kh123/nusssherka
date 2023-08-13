@@ -31,5 +31,12 @@ return [
     'language' => 'اللغة',
     'currency' => 'العملة',
     'categories' => 'الفئات',
-
+    'name' => 'الاسم',
+    'phone_number' => 'رقم الهاتف',
+    'password' => 'كلمة المرور',
+    'password_confirmation' => 'تأكيد كلمة المرور',
+    'email' => 'الإيميل',
+    'create' => 'إنشاء',
+    'log_in' => 'تسجيل دخول',
+    'remember_me' => 'تذكرني',
 ];
