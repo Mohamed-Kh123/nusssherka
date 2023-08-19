@@ -34,7 +34,6 @@
     <link rel="stylesheet" href="{{ asset('assets/front/css/nice-select.css') }}">
     <!-- Magnific Popup CSS -->
     <link rel="stylesheet" href="{{ asset('assets/front/css/magnific-popup.css') }}">
-    <!-- Bootstrap V4.1.3 Fremwork CSS -->
     <link rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css.map') }}">
 
@@ -432,6 +431,7 @@
 <script src="{{ asset('assets/front/js/main.js') }}"></script>
 {{-- <script src="{{ asset('assets/front/all.min.js') }}"></script> --}}
 
+<script src="{{ asset('assets/front/js/owl.carousel.js') }}"></script>
 
 @stack('script')
 

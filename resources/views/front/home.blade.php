@@ -29,7 +29,7 @@
     </div>
 
 
-    <div class="container">
+    <div class="container pb-3">
         <div class="row">
             <div class="col-md-12 text-center">
                 <hr>
@@ -98,12 +98,72 @@
             </div>
         </div>
         <div class="grid-3">
-            <div class="bundle">
-                <img src="{{asset('assets/slider.jpg')}}">
-            </div>
-            <div class="bundle"></div>
-            <div class="bundle"></div>
+            @foreach($bundles as $bundle)
+                <div class="bundle">
+                    <button type="button" class="modal-btn-img" data-bs-toggle="modal"
+                            data-bs-target="#{{ _get($bundle, 'slug') }}">
+                        <img src="{{_get($bundle,'image_url')}}">
+                    </button>
+                    <div class="price">
+                        <span class="text">السعر</span>
+                        <span class="price">${{_get($bundle, 'price')}}</span>
+                    </div>
+                </div>
+            @endforeach
         </div>
+        @foreach($bundles as $bundle)
+            <div class="modal fade" id="{{ _get($bundle, 'slug') }}" data-bs-backdrop="static"
+                 data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <form class="form modal-content" id="form" action="{{ route('checkout.store') }}"
+                          method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5"
+                                id="staticBackdropLabel">{{ _get($bundle, 'name') }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            <div class="form-group" id="append-form">
+                                @include('front.forms.bundle', [
+                                    'type' => _get($bundle, 'slug'),
+                                    'total' => _get($bundle, 'price', 0)
+                                ])
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="purchase btn" type="submit">اتمام عملية الدفع</button>
+                            <button type="button" class="btn dismiss" data-bs-dismiss="modal">إلغاء
+                                الأمر
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
+@endpush
 

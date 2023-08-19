@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\NotificationsController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PaymentsController as AdminPaymentsController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\BundlesController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -52,6 +53,7 @@ Route::middleware(LangMiddleware::class)->group(function () {
             ->group(function () {
                 Route::resource('categories', CategoriesController::class);
                 Route::resource('products', ProductsController::class);
+                Route::resource('bundles', BundlesController::class);
                 Route::resource('notifications', NotificationsController::class);
                 Route::get('/batch/{id}', [NotificationsController::class, 'getBatch']);
                 Route::get('contact-us', [ContactUsController::class, 'create'])->name('contact.create');

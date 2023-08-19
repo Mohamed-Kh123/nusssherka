@@ -39,4 +39,7 @@ return [
     'create' => 'Create',
     'log_in' => 'Log in',
     'remember_me' => 'Remember me',
+    'summarize' => 'Summarize',
+    'brand_name' => 'Brand Name',
+
 ];

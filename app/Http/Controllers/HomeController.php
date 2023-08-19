@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bundle;
 use App\Models\Category;
 use App\Models\Dimension;
 use App\Models\Image;
@@ -33,11 +34,11 @@ class HomeController extends Controller
             ];
         });
 
-//        dd($categories);
-
+        $bundles = Bundle::latest()->get();
 
         return view('front.home', [
-            'categories' => $categories
+            'categories' => $categories,
+            'bundles' => $bundles
         ]);
     }
 }

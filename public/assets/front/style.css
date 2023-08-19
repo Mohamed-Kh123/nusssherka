@@ -6775,14 +6775,31 @@ td a.btn {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    height: 400px;
 }
 
 .bundle {
-    background-color: red;
     border-radius: 8px;
     transition: 0.5s all;
     overflow: hidden;
+}
+.bundle .price{
+    background-color: #efefef;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bundle .price span.text{
+    color:#f0474d;
+    font-weight: 600;
+    font-size: 18px
+}
+.bundle .price span.price{
+    color: #fff;
+    background-color: #f0474d;
+    font-weight: 600;
+    padding: 4px 24px;
+    border-radius: 4px;
 }
 
 .bundle img {
@@ -6852,7 +6869,8 @@ li.active form button[type="submit"]:hover {
     text-decoration: none;
 }
 .input-container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 4px;
     margin-top: 1rem;
     align-items: center;
@@ -6877,7 +6895,7 @@ li.active form button[type="submit"]:hover {
 
 .input-container input::placeholder,
 .input-container textarea::placeholder {
-    font-family: 500;
+    font-weight: 500;
     font-size: 14px;
     text-align: start;
 }
@@ -6972,4 +6990,7 @@ li.active form button[type="submit"]:hover {
     .input-container {
         grid-template-columns: 1fr;
     }
+}
+.small-box p{
+    color: #fff;
 }

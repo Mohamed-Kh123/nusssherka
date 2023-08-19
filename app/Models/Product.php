@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
-class Product extends Model
+class Product extends BaseModel
 {
     use HasFactory;
 
@@ -52,27 +52,27 @@ class Product extends Model
     }
 
 
-    public function getImageUrlAttribute()
-    {
-        if ($this->image) {
-            $path = storage_path("app/public/uploads/images/$this->image");
-            $exists = File::exists($path);
-            if (!$exists) {
-                return asset('storage/null.jpg');
-            }
-
-            $image = Image::make($path);
-
-            $response = Response::make($image->encode($image->mime), 200);
-            $response->header("CF-Cache-Status", 'HIF');
-            $response->header("Cache-Control", 'max-age=604800, public');
-            $response->header("Content-Type", $image->mime);
-
-            // Generate a URL for the image
-            return asset("storage/uploads/images/$this->image");
-        }
-        return asset('storage/null.jpg');
-    }
+//    public function getImageUrlAttribute()
+//    {
+//        if ($this->image) {
+//            $path = storage_path("app/public/uploads/images/$this->image");
+//            $exists = File::exists($path);
+//            if (!$exists) {
+//                return asset('storage/null.jpg');
+//            }
+//
+//            $image = Image::make($path);
+//
+//            $response = Response::make($image->encode($image->mime), 200);
+//            $response->header("CF-Cache-Status", 'HIF');
+//            $response->header("Cache-Control", 'max-age=604800, public');
+//            $response->header("Content-Type", $image->mime);
+//
+//            // Generate a URL for the image
+//            return asset("storage/uploads/images/$this->image");
+//        }
+//        return asset('storage/null.jpg');
+//    }
 
     // public function getPriceAttribute()
     // {
