@@ -6781,6 +6781,7 @@ td a.btn {
     border-radius: 8px;
     transition: 0.5s all;
     overflow: hidden;
+    border: 1px solid #ddd;
 }
 .bundle .price{
     background-color: #efefef;
@@ -6810,7 +6811,7 @@ td a.btn {
 
 .bundle:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -6858,13 +6859,13 @@ li.active form button[type="submit"]:hover {
     display: inline-block;
     transition: 0.15s all;
 }
-.modal-btn-img:hover {
-    transform: translateY(-0.25em);
-}
+/*.modal-btn-img:hover {*/
+/*    transform: translateY(-0.25em);*/
+/*}*/
 
-.modal-btn-img:active {
-    transform: translateY(0em);
-}
+/*.modal-btn-img:active {*/
+/*    transform: translateY(0em);*/
+/*}*/
 .hb-menu nav > ul > li > a {
     text-decoration: none;
 }

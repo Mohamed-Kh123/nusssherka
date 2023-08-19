@@ -25,11 +25,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script>
-        const userId = {{ Auth::id() }};
-    </script>
-    @vite('resources/js/app.js')
 </head>
 
 <body class="hold-transition sidebar-mini">
