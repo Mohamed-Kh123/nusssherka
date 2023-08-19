@@ -6779,7 +6779,7 @@ td a.btn {
 
 .bundle {
     border-radius: 8px;
-    transition: 0.5s all;
+    transition: 0.25s all;
     overflow: hidden;
     border: 1px solid #ddd;
 }
@@ -6810,10 +6810,11 @@ td a.btn {
 }
 
 .bundle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.55em);
 }
-
+.bundle:active {
+    transform: translateY(0em);
+}
 @media (max-width: 768px) {
     .grid-3 {
         grid-template-columns: repeat(2, 1fr);
